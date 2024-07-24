@@ -1,0 +1,220 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1200px; /* Aumenta a largura máxima da container */
+  margin: 20px auto; /* Adiciona margem superior e inferior */
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto 20px;
+  max-width: 100px;
+}
+
+h1 {
+  text-align: center;
+  color: #0056b3; /* Ajustar a cor de acordo com o logo */
+  margin-bottom: 20px; /* Adiciona espaço abaixo do título */
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label, input, select, button {
+  margin-bottom: 10px;
+}
+
+input, select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+input[type="submit"] {
+  background-color: #0056b3; /* Ajustar a cor de acordo com o logo */
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+  background-color: #003d80; /* Ajustar a cor de acordo com o logo */
+}
+
+/* Estilo da tabela de agendamentos */
+#agendamentos-tabela {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+#agendamentos-tabela th, #agendamentos-tabela td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+#agendamentos-tabela th {
+  background-color: #f4f4f4;
+}
+
+/* Estilo para telas pequenas */
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+    padding: 10px;
+  }
+
+  .logo {
+    max-width: 80px;
+  }
+
+  h1 {
+    font-size: 1.5em;
+  }
+
+  form {
+    padding: 10px;
+  }
+
+  input, select {
+    padding: 8px;
+  }
+
+  #agendamentos-tabela th, #agendamentos-tabela td {
+    padding: 8px;
+  }
+}
+
+/* Estilo para telas muito pequenas */
+@media (max-width: 480px) {
+  .container {
+    width: 100%;
+    padding: 5px;
+  }
+
+  .logo {
+    max-width: 60px;
+  }
+
+  h1 {
+    font-size: 1.2em;
+  }
+
+  form {
+    padding: 5px;
+  }
+
+  input, select {
+    padding: 5px;
+  }
+
+  #agendamentos-tabela th, #agendamentos-tabela td {
+    padding: 6px;
+  }
+
+  #agendamentos-tabela {
+    font-size: 0.9em;
+  }
+}
+
+
+#auth-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  margin-bottom: 20px;
+}
+
+#auth-container h2 {
+  text-align: center;
+  color: #0056b3;
+  margin-bottom: 20px;
+}
+
+#auth-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+#auth-container label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+#auth-container input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+#auth-container button {
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#auth-container button:hover {
+  background-color: #003d80;
+}
+
+#auth-container p {
+  text-align: center;
+  color: #d9534f; /* Cor do texto de erro */
+  margin-bottom: 15px;
+}
+
+/* Estilo do botão de logout */
+#logout-button {
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: block;
+  margin: 20px auto 0;
+}
+
+#logout-button:hover {
+  background-color: #c9302c;
+}
+
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+table tr:hover {
+  background-color: #ddd;
+}
+
+thead th {
+  position: sticky;
+  top: 0;
+  background-color: #ffffff;
+  z-index: 1;
+}

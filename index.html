@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Sistema de Agendamentos</title>
+  
+  <!-- scripts do Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-storage.js"></script>
+
+</head>
+<body>
+  
+  <div id="auth-container">
+    <!--Login-->
+    <h2>Login</h2>
+    <form id="login-form">
+      <label for="login-email">Email</label>
+      <input type="email" id="login-email" placeholder="Seu email aqui..." required>
+      <label for="login-password">Senha</label>
+      <input type="password" id="login-password" placeholder="Sua senha aqui..." required>
+      <button type="submit">Login</button>
+    </form>
+    <p id="login-message"></p>
+
+    <!--Cadastro-->
+    <h2>Cadastro</h2>
+    <form id="signup-form">
+      <label for="signup-email">Email</label>
+      <input type="email" id="signup-email" placeholder="Seu email aqui..." required>
+      <label for="signup-password">Senha</label>
+      <input type="password" id="signup-password" placeholder="Sua senha aqui..." required>
+      <button type="submit">Cadastrar</button>
+    </form>
+    <p id="signup-message"></p>
+    
+    <button id="logout-button" style="display: none;">Sair</button>
+  </div>
+  
+  
+  <div class="container" id="form-container" style="display: none;">
+    <img src="logo.png" alt="Logo da Escola" class="logo">
+    <h1>Sistema de Agendamentos</h1>
+
+    <!--Formulário-->
+    <form id="agendamentos" class="form-container">
+      
+      <label for="nome">Nome do Professor</label>
+      <input type="text" id="nome" name="Nome do Professor" placeholder="Seu nome aqui..." required>
+      
+      <label for="sala">Selecione a Sala</label>
+      <select name="sala" id="sala" required>
+        <option value="0" selected disabled>Selecione a sala</option>
+        <option value="salaInformatica">Sala de Informática</option>
+        <option value="salaDanca">Sala de Dança</option>
+        <option value="salaMultifuncional">Sala Multifuncional</option>
+        <option value="salaLinguagens">Sala de Linguagens</option>
+        <option value="labBioQui">Laboratório de Biologia/Química</option>
+        <option value="labFisMat">Laboratório de Física/Matemática</option>
+        <option value="quadraPoliesportiva">Quadra Poliesportiva</option>
+        <option value="gramadoSintetico">Gramado Sintético</option>
+        <option value="pistaAtletismo">Pista de Atletismo</option>
+        <option value="salaProjecao9">Sala de Projeção 09</option>
+        <option value="salaProjecao10">Sala de Projeção 10</option>
+        <option value="salaProjecao11">Sala de Projeção 11</option>
+        <option value="salaProjecao12">Sala de Projeção 12</option>
+        <option value="teatro">Teatro</option>
+        <option value="biblioteca">Biblioteca</option>
+        <option value="projetor1">Projetor 01</option>
+        <option value="projetor2">Projetor 02</option>
+        <option value="projetor3">Projetor 03</option>
+      </select>
+
+      <label for="turno">Selecione o Turno</label>
+      <select name="turno" id="turno" required>
+        <option value="0" selected disabled>Selecione o turno</option>
+        <option value="matutino">Matutino</option>
+        <option value="vespertino">Vespertino</option>
+        <option value="noturno">Noturno</option>
+      </select>
+
+      <label for="horario">Selecione o Horário</label>
+      <select name="horario" id="horario" required>
+        <option value="0" selected disabled>Selecione o horário</option>
+        <option value="horario1">1° Horário</option>
+        <option value="horario2">2° Horário</option>
+        <option value="horario3">3° Horário</option>
+        <option value="horario4">4° Horário</option>
+        <option value="horario5">5° Horário</option>
+      </select>
+
+      <label for="data">Selecione a Data</label>
+      <input type="date" id="data" required>
+
+      <label for="arquivo">Anexar Plano de Aula</label>
+      <input type="file" id="arquivo" name="arquivo" required>
+      
+      <input type="submit" value="Agendar">
+    </form>
+    <p id="mensagem"></p>
+
+    <!--Tabela com agendamentos-->
+    <h2>Agendamentos</h2>
+
+    
+    <!-- Filtro de sala -->
+    
+    <div id="filtro-sala">
+      <label for="filtro-nome"></label>
+      <input type="text" id="filtro-nome" placeholder="Nome do Professor">
+      
+      <label for="filtro-sala-select"></label>
+      <select id="filtro-sala-select">
+        <option value="">Todas as salas</option>
+        <option value="salaInformatica">Sala de Informática</option>
+        <option value="salaDanca">Sala de Dança</option>
+        <option value="salaMultifuncional">Sala Multifuncional</option>
+        <option value="salaLinguagens">Sala de Linguagens</option>
+        <option value="labBioQui">Laboratório de Biologia/Química</option>
+        <option value="labFisMat">Laboratório de Física/Matemática</option>
+        <option value="quadraPoliesportiva">Quadra Poliesportiva</option>
+        <option value="gramadoSintetico">Gramado Sintético</option>
+        <option value="pistaAtletismo">Pista de Atletismo</option>
+        <option value="salaProjecao9">Sala de Projeção 09</option>
+        <option value="salaProjecao10">Sala de Projeção 10</option>
+        <option value="salaProjecao11">Sala de Projeção 11</option>
+        <option value="salaProjecao12">Sala de Projeção 12</option>
+        <option value="teatro">Teatro</option>
+        <option value="biblioteca">Biblioteca</option>
+        <option value="projetor1">Projetor 01</option>
+        <option value="projetor2">Projetor 02</option>
+        <option value="projetor3">Projetor 03</option>
+      </select>
+
+      <label for="filtro-turno"></label>
+      <select id="filtro-turno">
+        <option value="">Todos os turnos</option>
+        <option value="matutino">Matutino</option>
+        <option value="vespertino">Vespertino</option>
+        <option value="noturno">Noturno</option>
+      </select>
+
+      <label for="filtro-horario"></label>
+      <select id="filtro-horario">
+        <option value="">Todos os horários</option>
+        <option value="horario1">1° Horário</option>
+        <option value="horario2">2° Horário</option>
+        <option value="horario3">3° Horário</option>
+        <option value="horario4">4° Horário</option>
+        <option value="horario5">5° Horário</option>
+      </select>
+
+      <label for="filtro-data"></label>
+      <input type="date" id="filtro-data">
+
+      <button id="filtro-button">Aplicar Filtro</button>
+      <button id="remover-filtro-button">Remover Filtros</button>
+    </div>
+
+    <table id="agendamentos-tabela">
+      <thead>
+        <tr>
+          <th>Nome do Professor</th>
+          <th>Sala</th>
+          <th>Turno</th>
+          <th>Horário</th>
+          <th>Data</th>
+          <th>Plano de Aula</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+  
+  <script type="module" src="script.js"></script>
+</body>
+</html>
